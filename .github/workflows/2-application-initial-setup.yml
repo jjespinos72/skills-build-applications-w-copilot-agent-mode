@@ -134,6 +134,6 @@ jobs:
       - name: Disable current workflow and enable next one
         run: |
           gh workflow disable "${{github.workflow}}"
-          gh workflow enable "Step 3"
+          gh workflow enable "3-database-django-project-setup.yml"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

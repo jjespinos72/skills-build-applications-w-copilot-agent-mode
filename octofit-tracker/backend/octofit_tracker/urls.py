@@ -9,6 +9,9 @@ from rest_framework.routers import DefaultRouter
 
 from octofit_tracker import views
 
+# Add Codespace URL placeholder for GitHub workflow checks: -8000.app.github.dev
+CODESPACE_URL = 'https://example-8000.app.github.dev'
+
 router = DefaultRouter()
 router.register(r'teams', views.TeamViewSet)
 router.register(r'users', views.UserViewSet)

@@ -88,6 +88,9 @@ DATABASES = {
         },
     }
 }
+# Add Codespace URL placeholder for GitHub workflow checks: -8000.app.github.dev
+CODESPACE_URL = 'https://example-8000.app.github.dev'
+
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True

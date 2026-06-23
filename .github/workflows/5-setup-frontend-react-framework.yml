@@ -181,6 +181,6 @@ jobs:
       - name: Disable current workflow and enable next one
         run: |
           gh workflow disable "${{github.workflow}}"
-          gh workflow enable "Step 6"
+          gh workflow enable "6-copilot-on-github.yml"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

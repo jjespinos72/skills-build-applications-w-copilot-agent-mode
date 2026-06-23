@@ -156,6 +156,6 @@ jobs:
       - name: Disable current workflow and enable next one
         run: |
           gh workflow disable "${{github.workflow}}"
-          gh workflow enable "Step 4"
+          gh workflow enable "4-setup-django-rest-framework.yml"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

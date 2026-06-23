@@ -1,0 +1,68 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0099cc;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="grad2">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ee5a6f;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+
+  <!-- Octopus body -->
+  <circle cx="100" cy="70" r="40" fill="url(#grad1)" stroke="#0077aa" stroke-width="2"/>
+
+  <!-- Eyes -->
+  <circle cx="90" cy="60" r="6" fill="white"/>
+  <circle cx="110" cy="60" r="6" fill="white"/>
+  <circle cx="91" cy="61" r="3" fill="#0099cc"/>
+  <circle cx="111" cy="61" r="3" fill="#0099cc"/>
+
+  <!-- Smile -->
+  <path d="M 95 75 Q 100 78 105 75" stroke="#white" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Tentacles (7 total) -->
+  <!-- Tentacle 1 -->
+  <path d="M 75 105 Q 60 120 50 150" stroke="url(#grad1)" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <circle cx="45" cy="155" r="6" fill="url(#grad2)"/>
+
+  <!-- Tentacle 2 -->
+  <path d="M 85 105 Q 75 125 70 160" stroke="url(#grad1)" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <circle cx="65" cy="165" r="6" fill="url(#grad2)"/>
+
+  <!-- Tentacle 3 -->
+  <path d="M 100 108 Q 100 130 100 170" stroke="url(#grad1)" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <circle cx="100" cy="175" r="6" fill="url(#grad2)"/>
+
+  <!-- Tentacle 4 -->
+  <path d="M 115 105 Q 125 125 130 160" stroke="url(#grad1)" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <circle cx="135" cy="165" r="6" fill="url(#grad2)"/>
+
+  <!-- Tentacle 5 -->
+  <path d="M 125 105 Q 140 120 150 150" stroke="url(#grad1)" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <circle cx="155" cy="155" r="6" fill="url(#grad2)"/>
+
+  <!-- Tentacle 6 -->
+  <path d="M 70 90 Q 50 85 35 80" stroke="url(#grad1)" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <circle cx="30" cy="75" r="5" fill="url(#grad2)"/>
+
+  <!-- Tentacle 7 -->
+  <path d="M 130 90 Q 150 85 165 80" stroke="url(#grad1)" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <circle cx="170" cy="75" r="5" fill="url(#grad2)"/>
+
+  <!-- Dumbbell for fitness -->
+  <g transform="translate(100, 40)">
+    <circle cx="-20" cy="-15" r="8" fill="url(#grad2)" stroke="#ff4757" stroke-width="1"/>
+    <rect x="-14" y="-8" width="28" height="6" fill="#ff4757" stroke="#ff4757" stroke-width="1"/>
+    <circle cx="20" cy="-15" r="8" fill="url(#grad2)" stroke="#ff4757" stroke-width="1"/>
+  </g>
+
+  <!-- Stars around -->
+  <g fill="#ffd700" opacity="0.7">
+    <polygon points="30,20 35,35 50,35 38,45 43,60 30,50 17,60 22,45 10,35 25,35" />
+    <polygon points="170,20 175,35 190,35 178,45 183,60 170,50 157,60 162,45 150,35 165,35" />
+    <polygon points="100,10 103,18 112,18 106,23 109,31 100,26 91,31 94,23 88,18 97,18" />
+  </g>
+</svg>

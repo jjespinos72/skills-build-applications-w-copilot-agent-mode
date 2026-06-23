@@ -41,40 +41,79 @@ function Workouts() {
     }
   };
 
-  if (loading) return <div className="alert alert-info">Loading workouts...</div>;
-  if (error) return <div className="alert alert-danger">Error: {error}</div>;
+  if (loading) {
+    return (
+      <div className="container mt-5">
+        <div className="alert alert-info" role="alert">
+          <strong>Loading...</strong> Fetching workouts from API...
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mt-5">
+        <div className="alert alert-danger" role="alert">
+          <strong>Error!</strong> {error}
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="container mt-4">
-      <h2>Workouts</h2>
-      {workouts.length === 0 ? (
-        <div className="alert alert-warning">No workouts found</div>
-      ) : (
-        <table className="table table-striped table-hover">
-          <thead className="table-dark">
-            <tr>
-              <th>ID</th>
-              <th>User</th>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Date</th>
-              <th>Duration (minutes)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {workouts.map((workout) => (
-              <tr key={workout.id}>
-                <td>{workout.id}</td>
-                <td>{workout.user || 'N/A'}</td>
-                <td>{workout.name}</td>
-                <td>{workout.description || 'N/A'}</td>
-                <td>{new Date(workout.date).toLocaleDateString()}</td>
-                <td>{workout.duration_minutes}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+    <div className="container-fluid mt-4 mb-5">
+      <div className="row mb-4">
+        <div className="col-lg-12 mx-auto">
+          <div className="d-flex justify-content-between align-items-center mb-4">
+            <h2 className="mb-0">💪 Workouts</h2>
+            <button className="btn btn-primary" onClick={fetchWorkouts}>
+              🔄 Refresh
+            </button>
+          </div>
+          {workouts.length === 0 ? (
+            <div className="card">
+              <div className="card-body text-center">
+                <div className="alert alert-warning mb-0" role="alert">
+                  No workouts found
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="card">
+              <div className="card-header bg-dark text-white">
+                <strong>Total Workouts: {workouts.length}</strong>
+              </div>
+              <div className="table-responsive">
+                <table className="table table-striped table-hover mb-0">
+                  <thead className="table-dark">
+                    <tr>
+                      <th>ID</th>
+                      <th>User</th>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Date</th>
+                      <th>Duration (min)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {workouts.map((workout) => (
+                      <tr key={workout.id}>
+                        <td><span className="badge bg-secondary">{workout.id}</span></td>
+                        <td><strong>{workout.user || 'N/A'}</strong></td>
+                        <td>{workout.name}</td>
+                        <td>{workout.description || <span className="text-muted">N/A</span>}</td>
+                        <td>{new Date(workout.date).toLocaleDateString()}</td>
+                        <td>{workout.duration_minutes}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

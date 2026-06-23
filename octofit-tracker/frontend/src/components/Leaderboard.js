@@ -41,36 +41,87 @@ function Leaderboard() {
     }
   };
 
-  if (loading) return <div className="alert alert-info">Loading leaderboard...</div>;
-  if (error) return <div className="alert alert-danger">Error: {error}</div>;
+  if (loading) {
+    return (
+      <div className="container mt-5">
+        <div className="alert alert-info" role="alert">
+          <strong>Loading...</strong> Fetching leaderboard from API...
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mt-5">
+        <div className="alert alert-danger" role="alert">
+          <strong>Error!</strong> {error}
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="container mt-4">
-      <h2>Leaderboard</h2>
-      {leaderboard.length === 0 ? (
-        <div className="alert alert-warning">No leaderboard entries found</div>
-      ) : (
-        <table className="table table-striped table-hover">
-          <thead className="table-dark">
-            <tr>
-              <th>Rank</th>
-              <th>User</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leaderboard.map((entry, index) => (
-              <tr key={entry.id}>
-                <td>
-                  <span className="badge bg-primary">{index + 1}</span>
-                </td>
-                <td>{entry.user || 'N/A'}</td>
-                <td>{entry.score}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+    <div className="container-fluid mt-4 mb-5">
+      <div className="row mb-4">
+        <div className="col-lg-8 mx-auto">
+          <div className="d-flex justify-content-between align-items-center mb-4">
+            <h2 className="mb-0">🏆 Leaderboard</h2>
+            <button className="btn btn-primary" onClick={fetchLeaderboard}>
+              🔄 Refresh
+            </button>
+          </div>
+          {leaderboard.length === 0 ? (
+            <div className="card">
+              <div className="card-body text-center">
+                <div className="alert alert-warning mb-0" role="alert">
+                  No leaderboard entries found
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="card">
+              <div className="card-header bg-dark text-white">
+                <strong>Top {leaderboard.length} Competitors</strong>
+              </div>
+              <div className="table-responsive">
+                <table className="table table-striped table-hover mb-0">
+                  <thead className="table-dark">
+                    <tr>
+                      <th>Rank</th>
+                      <th>User</th>
+                      <th>Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {leaderboard.map((entry, index) => {
+                      let badgeColor = 'bg-secondary';
+                      let medal = index + 1;
+                      if (index === 0) {
+                        badgeColor = 'bg-warning text-dark';
+                        medal = '🥇';
+                      } else if (index === 1) {
+                        badgeColor = 'bg-secondary';
+                        medal = '🥈';
+                      } else if (index === 2) {
+                        badgeColor = 'bg-danger';
+                        medal = '🥉';
+                      }
+                      return (
+                        <tr key={entry.id} className={index < 3 ? 'table-active' : ''}>
+                          <td><span className={`badge ${badgeColor} fs-6`}>{medal}</span></td>
+                          <td><strong>{entry.user || 'N/A'}</strong></td>
+                          <td><span className="badge bg-success fs-6">{entry.score}</span></td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

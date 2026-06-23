@@ -41,36 +41,75 @@ function Teams() {
     }
   };
 
-  if (loading) return <div className="alert alert-info">Loading teams...</div>;
-  if (error) return <div className="alert alert-danger">Error: {error}</div>;
+  if (loading) {
+    return (
+      <div className="container mt-5">
+        <div className="alert alert-info" role="alert">
+          <strong>Loading...</strong> Fetching teams from API...
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mt-5">
+        <div className="alert alert-danger" role="alert">
+          <strong>Error!</strong> {error}
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="container mt-4">
-      <h2>Teams</h2>
-      {teams.length === 0 ? (
-        <div className="alert alert-warning">No teams found</div>
-      ) : (
-        <table className="table table-striped table-hover">
-          <thead className="table-dark">
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Created At</th>
-            </tr>
-          </thead>
-          <tbody>
-            {teams.map((team) => (
-              <tr key={team.id}>
-                <td>{team.id}</td>
-                <td>{team.name}</td>
-                <td>{team.description || 'N/A'}</td>
-                <td>{new Date(team.created_at).toLocaleDateString()}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+    <div className="container-fluid mt-4 mb-5">
+      <div className="row mb-4">
+        <div className="col-lg-10 mx-auto">
+          <div className="d-flex justify-content-between align-items-center mb-4">
+            <h2 className="mb-0">🏢 Teams</h2>
+            <button className="btn btn-primary" onClick={fetchTeams}>
+              🔄 Refresh
+            </button>
+          </div>
+          {teams.length === 0 ? (
+            <div className="card">
+              <div className="card-body text-center">
+                <div className="alert alert-warning mb-0" role="alert">
+                  No teams found
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="card">
+              <div className="card-header bg-dark text-white">
+                <strong>Total Teams: {teams.length}</strong>
+              </div>
+              <div className="table-responsive">
+                <table className="table table-striped table-hover mb-0">
+                  <thead className="table-dark">
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Created At</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {teams.map((team) => (
+                      <tr key={team.id}>
+                        <td><span className="badge bg-secondary">{team.id}</span></td>
+                        <td><strong>{team.name}</strong></td>
+                        <td>{team.description || <span className="text-muted">N/A</span>}</td>
+                        <td>{new Date(team.created_at).toLocaleDateString()}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

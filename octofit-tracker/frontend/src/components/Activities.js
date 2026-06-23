@@ -41,40 +41,79 @@ function Activities() {
     }
   };
 
-  if (loading) return <div className="alert alert-info">Loading activities...</div>;
-  if (error) return <div className="alert alert-danger">Error: {error}</div>;
+  if (loading) {
+    return (
+      <div className="container mt-5">
+        <div className="alert alert-info" role="alert">
+          <strong>Loading...</strong> Fetching activities from API...
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mt-5">
+        <div className="alert alert-danger" role="alert">
+          <strong>Error!</strong> {error}
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="container mt-4">
-      <h2>Activities</h2>
-      {activities.length === 0 ? (
-        <div className="alert alert-warning">No activities found</div>
-      ) : (
-        <table className="table table-striped table-hover">
-          <thead className="table-dark">
-            <tr>
-              <th>ID</th>
-              <th>User</th>
-              <th>Type</th>
-              <th>Duration (minutes)</th>
-              <th>Distance (km)</th>
-              <th>Timestamp</th>
-            </tr>
-          </thead>
-          <tbody>
-            {activities.map((activity) => (
-              <tr key={activity.id}>
-                <td>{activity.id}</td>
-                <td>{activity.user || 'N/A'}</td>
-                <td>{activity.activity_type}</td>
-                <td>{activity.duration_minutes}</td>
-                <td>{activity.distance_km || 'N/A'}</td>
-                <td>{new Date(activity.timestamp).toLocaleDateString()}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+    <div className="container-fluid mt-4 mb-5">
+      <div className="row mb-4">
+        <div className="col-lg-12 mx-auto">
+          <div className="d-flex justify-content-between align-items-center mb-4">
+            <h2 className="mb-0">🏃 Activities</h2>
+            <button className="btn btn-primary" onClick={fetchActivities}>
+              🔄 Refresh
+            </button>
+          </div>
+          {activities.length === 0 ? (
+            <div className="card">
+              <div className="card-body text-center">
+                <div className="alert alert-warning mb-0" role="alert">
+                  No activities found
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="card">
+              <div className="card-header bg-dark text-white">
+                <strong>Total Activities: {activities.length}</strong>
+              </div>
+              <div className="table-responsive">
+                <table className="table table-striped table-hover mb-0">
+                  <thead className="table-dark">
+                    <tr>
+                      <th>ID</th>
+                      <th>User</th>
+                      <th>Type</th>
+                      <th>Duration (min)</th>
+                      <th>Distance (km)</th>
+                      <th>Timestamp</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {activities.map((activity) => (
+                      <tr key={activity.id}>
+                        <td><span className="badge bg-secondary">{activity.id}</span></td>
+                        <td><strong>{activity.user || 'N/A'}</strong></td>
+                        <td><span className="badge bg-success">{activity.activity_type}</span></td>
+                        <td>{activity.duration_minutes}</td>
+                        <td>{activity.distance_km || <span className="text-muted">N/A</span>}</td>
+                        <td>{new Date(activity.timestamp).toLocaleDateString()}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
